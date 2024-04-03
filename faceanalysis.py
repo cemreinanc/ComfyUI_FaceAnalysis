@@ -136,7 +136,7 @@ class FaceBoundingBox:
         if not out_img:
             for i in image:
                 img = T.ToPILImage()(i.permute(2, 0, 1)).convert('RGB')
-                out_img.append(i)
+                out_img.append(T.ToTensor()(img).permute(1, 2, 0).unsqueeze(0))
                 out_x.append(0)
                 out_y.append(0)
                 out_w.append(img.width)
