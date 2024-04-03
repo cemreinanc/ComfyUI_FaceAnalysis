@@ -134,7 +134,13 @@ class FaceBoundingBox:
                     out_h.append(h)
 
         if not out_img:
-            raise Exception('No face detected in image.')
+            for i in image:
+                img = T.ToPILImage()(i.permute(2, 0, 1)).convert('RGB')
+                out_img.append(i)
+                out_x.append(0)
+                out_y.append(0)
+                out_w.append(img.width)
+                out_h.append(img.height)
 
         if len(out_img) == 1:
             index = 0
